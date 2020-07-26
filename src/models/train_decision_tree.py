@@ -1,7 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
-from sklearn.metrics import classification_report 
+from sklearn.metrics import classification_report
 from utils import *
 
 def train_model(train_features, train_y):
@@ -15,7 +15,7 @@ def train_model(train_features, train_y):
     return(clf_rf)
 
 def main():
-    train_features = load_train_features('/Users/vishwapardeshi/Documents/GitHub/Text_Classification_US_Presidential_Nominees_2020/data/processed/train.npz')
+    train_features = load_features('/Users/vishwapardeshi/Documents/GitHub/Text_Classification_US_Presidential_Nominees_2020/data/processed/train.npz')
     train_y = load_train_label('/Users/vishwapardeshi/Documents/GitHub/Text_Classification_US_Presidential_Nominees_2020/data/processed/train_y.csv')
 
     class_names = train_y.label.unique()

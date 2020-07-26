@@ -50,6 +50,10 @@ def save_data(matrix,filepath):
     """Save dataframe to the filepath as csv"""
     sparse.save_npz(filepath, matrix)
 
+def save_dataframe(df,filepath):
+    """Save dataframe to the filepath as csv"""
+    df.to_csv(filepath, index = False)
+
 def main():
     train_df = load_data('/Users/vishwapardeshi/Documents/GitHub/Text_Classification_US_Presidential_Nominees_2020/data/interim/clean_train.csv')
     test_df = load_data('/Users/vishwapardeshi/Documents/GitHub/Text_Classification_US_Presidential_Nominees_2020/data/interim/clean_test.csv')
@@ -61,9 +65,13 @@ def main():
     train_features = hstack([train_x, train_num_features])
     test_features = hstack([test_x, test_num_features])
     print(type(train_features))
+
     print("Saving features of train & test data")
     save_data(train_features, '/Users/vishwapardeshi/Documents/GitHub/Text_Classification_US_Presidential_Nominees_2020/data/processed/train.npz')
     save_data(test_features, '/Users/vishwapardeshi/Documents/GitHub/Text_Classification_US_Presidential_Nominees_2020/data/processed/test.npz')
+
+    save_dataframe(train_df, '/Users/vishwapardeshi/Documents/GitHub/Text_Classification_US_Presidential_Nominees_2020/data/processed/train_df.csv')
+    save_dataframe(test_df, '/Users/vishwapardeshi/Documents/GitHub/Text_Classification_US_Presidential_Nominees_2020/data/processed/test_df.csv')
 
 
 if __name__ == '__main__':

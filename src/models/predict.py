@@ -1,26 +1,23 @@
+import os
+import pandas as pd
 
-#### 16. Generate labels for semi-supervised
+import sklearn
+from utils import *
 
----
-"""
+def main():
+    dir_model = '/Users/vishwapardeshi/Documents/GitHub/Text_Classification_US_Presidential_Nominees_2020/models/'
+    clf_semi = load_model(os.path.join(dir_model, 'clf_semi.pkl'))
 
-part_3_labels = clf_semi.predict(test_features)
-print(part_3_labels)
+    test_df = load_data('/Users/vishwapardeshi/Documents/GitHub/Text_Classification_US_Presidential_Nominees_2020/data/processed/test_df.csv')
+    test_features = load_features('/Users/vishwapardeshi/Documents/GitHub/Text_Classification_US_Presidential_Nominees_2020/data/processed/test.npz')
 
-#sanity check
-print("The length of the predicted values ", len(part_3_labels))
-#extract file name from test_df
-file_label = test_df.file_name.tolist()
-print(file_label)
+    predicted_labels = clf_semi.predict(test_features)
 
-#convert to a dataframe
-final_submission = pd.DataFrame({'FILE': file_label, 'MODEL1':part_2_labels, 'MODEL2': part_3_labels})
-final_submission.head()
+    file_label = test_df.file_name.tolist()
 
-#sorting by file name
-submission_df = final_submission.sort_values('FILE')
-
-submission_df.head()
-
-#CONVERT TO TXT FILE
-final_submission.to_csv('submission.txt', sep='\t', index=False)
+    #convert to a dataframe
+    final_submission = pd.DataFrame({'FILE': file_label, 'MODEL1':part_2_labels, 'MODEL2': part_3_labels})
+    final_submission.head()
+    #sorting by file name
+    submission_df = final_submission.sort_values('FILE')
+    final_submission.to_csv('submission.txt', sep='\t', index=False)

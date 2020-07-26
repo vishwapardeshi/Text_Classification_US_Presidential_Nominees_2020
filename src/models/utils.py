@@ -6,13 +6,17 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 
-def load_train_features(filepath):
+def load_features(filepath):
     matrix = sparse.load_npz(filepath)
     return matrix
 
 def load_train_label(filepath):
     label = pd.read_csv(filepath)
     return label
+
+def load_data(filepath):
+    df = pd.read_csv(filepath)
+    return df
 
 def save_model(model, model_filepath):
     joblib.dump(model, open(model_filepath, 'wb'))
